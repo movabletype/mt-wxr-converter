@@ -4,11 +4,11 @@ A data converting tool from WXR (WordPress eXtended RSS) to MovableType.net form
 
 ## Screenshot
 
-![Screenshot](https://raw.githubusercontent.com/usualoma/wxr-to-mt-js/master/artwork/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/movabletype/mt-wxr-converter/master/artwork/screenshot.png)
 
 ## Usage
 
-* Open https://usualoma.github.io/wxr-to-mt-js
+* Open https://movabletype.github.io/mt-wxr-converter
 * Select (or drag and drop) a WXR file.
 * Select post types and custom fields setteings.
 * Download onverted CSV data as a zip archive.
