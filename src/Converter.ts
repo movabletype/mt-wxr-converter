@@ -61,7 +61,7 @@ class Converter {
         d =>
           [...d.getElementsByTagName("wp:meta_key")]
             .map((t: Element) => getNodeValue(t))
-            .filter(k => !k.match(/^_/)) // exclude private meta keys
+            .filter(k => k === "_thumbnail_id" || !k.match(/^_/)) // exclude private meta keys
       )
       .flat()
       .filter(Boolean)
@@ -249,10 +249,22 @@ class Converter {
               return;
             }
 
-            obj[`cf_${conf.customFieldMap[key]}`] = getNodeValueByTagName(
-              meta,
-              "wp:meta_value"
-            );
+            let value = getNodeValueByTagName(meta, "wp:meta_value");
+            if (key === "_thumbnail_id") {
+              let url;
+
+              [...d.getElementsByTagName("item")].forEach((elm: Element) => {
+                if (getNodeValueByTagName(elm, "wp:post_id") === value) {
+                  url = getNodeValueByTagName(elm, "wp:attachment_url");
+                }
+              });
+
+              if (url) {
+                value = url;
+              }
+            }
+
+            obj[`cf_${conf.customFieldMap[key]}`] = value;
           }
         );
 

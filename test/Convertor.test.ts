@@ -293,4 +293,40 @@ describe("export", () => {
       type: "Post",
     });
   });
+
+  test("with thumbnail", async () => {
+    const conv = new Converter();
+    conv.addDocument(fs.readFileSync(__dirname + "/dataset/with-thumbnail.xml", "utf8"));
+
+    const zip = await conv.export({
+      postTypeMap: {
+        post: "post",
+        page: "",
+        news: "",
+      },
+      customFieldMap: {
+        _thumbnail_id: "thumbnail",
+      },
+      convertBreaks: "__default__",
+      dirname: "test",
+    });
+
+    const posts = await zip.file("test/posts.csv").async("string");
+    const records = csvParse(posts, {
+      columns: true,
+      skip_empty_lines: true,
+    });
+    expect(records[0]).toStrictEqual({
+      basename: "",
+      body: `<p>テスト</p>`,
+      category: "",
+      cf_thumbnail: "http://localhost:8087/wp-content/uploads/2019/07/IMG_4078.jpg",
+      "convert breaks": "__default__",
+      date: "2019-07-12 19:56:00",
+      "extended body": "",
+      status: "Publish",
+      title: "アイキャッチあり",
+      type: "Post",
+    });
+  });
 });

@@ -77,7 +77,10 @@ class App {
         const input = clone.querySelectorAll("input")[0];
 
         input.name = `custom-fields[${t}]`;
-        input.value = t.replace(/-/g, "_").replace(/[^0-9a-zA-Z_]/g, "");
+        input.value = t
+          .replace(/-/g, "_")
+          .replace(/[^0-9a-zA-Z_]/g, "")
+          .replace(/^_thumbnail_id$/, "thumbnail");
 
         list.appendChild(clone);
       });
