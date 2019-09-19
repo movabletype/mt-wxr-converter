@@ -28,7 +28,7 @@ interface ExportConfig {
 
 interface FileData {
   filename: string;
-  data: string;
+  data: Blob;
 }
 
 class Converter {
@@ -287,7 +287,7 @@ class Converter {
     return csvStringifyAsync(objs, { header: true, columns: columns }).then(
       data => ({
         filename,
-        data,
+        data: new Blob(["\uFEFF" + data], { type: "text/csv;charset=utf-8" }),
       })
     );
   }
