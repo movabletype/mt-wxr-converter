@@ -31,9 +31,9 @@ class App {
       return;
     }
 
-    const promise = (this.readFilePromise = Promise.all([...files].map(
-      (f: File) => readFile(f)
-    ) as Promise<string>[]).then((strs: string[]) => {
+    const promise = (this.readFilePromise = Promise.all(
+      [...files].map((f: File) => readFile(f)) as Promise<string>[]
+    ).then((strs: string[]) => {
       const conv = new Converter();
       strs.forEach(str => conv.addDocument(str));
       return conv;
