@@ -37,8 +37,8 @@ class Converter {
   public addDocument(doc: Document | string): void {
     if (!(doc instanceof Document)) {
       const parser = new DOMParser();
-      // eslint-disable-next-line no-control-regex,no-misleading-character-class
       doc = doc.replace(
+        // eslint-disable-next-line no-control-regex,no-misleading-character-class
         /[^\x09\x0A\x0D\x20-\xFF\x85\xA0-\uD7FF\uE000-\uFDCF\uFDE0-\uFFFD\uD800-\uDBFF\uDC00-\uDFFF]/gm,
         ""
       ); // remove control characters
