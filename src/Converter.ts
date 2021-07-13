@@ -37,8 +37,11 @@ class Converter {
   public addDocument(doc: Document | string): void {
     if (!(doc instanceof Document)) {
       const parser = new DOMParser();
-      // eslint-disable-next-line no-control-regex
-      doc = doc.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]/g, ""); // remove control characters
+      // eslint-disable-next-line no-control-regex,no-misleading-character-class
+      doc = doc.replace(
+        /[^\x09\x0A\x0D\x20-\xFF\x85\xA0-\uD7FF\uE000-\uFDCF\uFDE0-\uFFFD\uD800-\uDBFF\uDC00-\uDFFF]/gm,
+        ""
+      ); // remove control characters
       doc = parser.parseFromString(doc, "application/xml");
     }
 
