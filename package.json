@@ -58,7 +58,7 @@
     "es6-promisify": "^6.1.0",
     "file-saver": "^2.0.5",
     "husky": "^2.7.0",
-    "jszip": "^3.7.1",
+    "jszip": "^3.8.0",
     "wpautop": "^1.0.0"
   }
 }
